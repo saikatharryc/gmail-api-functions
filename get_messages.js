@@ -108,7 +108,7 @@ function listmessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
   userId: 'me',
-  q : 'newer_than:1m',
+  q : 'newer_than:31d',
   auth: auth
 }, function(err, response){
   if (err) {
