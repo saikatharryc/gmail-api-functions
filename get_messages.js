@@ -154,7 +154,7 @@ function listSearchMessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
   userId: 'me',
-  q : 'subject:eclerx',
+  q : 'subject:eclerx newer_than:31d',
   auth: auth
 }, function(err, response){
   if (err) {
