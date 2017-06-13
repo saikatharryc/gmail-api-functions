@@ -107,6 +107,7 @@ function listmessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
   userId: 'me',
+  maxResults: 10,
   auth: auth
 }, function(err, response){
   if (err) {
