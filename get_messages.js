@@ -22,6 +22,7 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   // Gmail API.
   authorize(JSON.parse(content), getMessage);
   authorize(JSON.parse(content), listmessages);
+  authorize(JSON.parse(content), listSearchMessages);
 });
 
 /**
@@ -133,6 +134,27 @@ function getMessage(auth) {
 gmail.users.messages.get({
   id: msgId,
   userId: 'me',
+  auth: auth
+}, function(err, response){
+  if (err) {
+    console.log(err);
+    return;
+  }
+//console.log(response);
+});
+}
+
+
+/**
+ * List All message & Thread  IDs with the search Keyword
+ *
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ */
+function listSearchMessages(auth){
+  var gmail = google.gmail('v1');
+gmail.users.messages.list({
+  userId: 'me',
+  q : 'subject:eclerx',
   auth: auth
 }, function(err, response){
   if (err) {
