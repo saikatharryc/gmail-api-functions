@@ -98,6 +98,7 @@ function storeToken(token) {
   console.log('Token stored to ' + TOKEN_PATH);
 }
 
+
 /**
  * List All message & Thread  IDs
  *
@@ -107,7 +108,7 @@ function listmessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
   userId: 'me',
-  maxResults: 10,
+  q : 'newer_than:1m',
   auth: auth
 }, function(err, response){
   if (err) {
@@ -125,8 +126,12 @@ console.log(response);
  */
 function getMessage(auth) {
   var gmail = google.gmail('v1');
+  var msgId = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 gmail.users.messages.get({
-  id: '15c9e795e8569c52',
+  id: msgId,
   userId: 'me',
   auth: auth
 }, function(err, response){
