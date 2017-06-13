@@ -20,7 +20,7 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   }
   // Authorize a client with the loaded credentials, then call the
   // Gmail API.
-  authorize(JSON.parse(content), listLabels);
+  authorize(JSON.parse(content), getMessage);
   authorize(JSON.parse(content), listmessages);
 });
 
@@ -106,6 +106,26 @@ function storeToken(token) {
 function listmessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
+  userId: 'me',
+  auth: auth
+}, function(err, response){
+  if (err) {
+    console.log(err);
+    return;
+  }
+console.log(response);
+});
+}
+
+/**
+ * Gets the message with its ID.
+ *
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ */
+function getMessage(auth) {
+  var gmail = google.gmail('v1');
+gmail.users.messages.get({
+  id: '15c9e795e8569c52',
   userId: 'me',
   auth: auth
 }, function(err, response){
