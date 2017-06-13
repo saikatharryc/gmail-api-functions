@@ -98,7 +98,11 @@ function storeToken(token) {
   console.log('Token stored to ' + TOKEN_PATH);
 }
 
-
+/**
+ * List All message & Thread  IDs
+ *
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ */
 function listmessages(auth){
   var gmail = google.gmail('v1');
 gmail.users.messages.list({
