@@ -109,6 +109,10 @@ gmail.users.messages.list({
   userId: 'me',
   auth: auth
 }, function(err, response){
+  if (err) {
+    console.log(err);
+    return;
+  }
 console.log(response);
 });
 }
